@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# csv_file="https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-LX0117EN-SkillsNetwork/labs/M3/L2/arrays_table.csv"
+# wget $csv_file
+
 csv_file="./arrays_table.csv"
 
 # parse table columns into 3 arrays
