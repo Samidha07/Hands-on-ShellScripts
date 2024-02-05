@@ -37,32 +37,34 @@ backupFileName="backup-${currentTS}.tar.gz"
 # To make things easier, we will define some useful variables...
 
 # [TASK 5]
-origAbsPath=`pwd`
+origAbsPath=$(pwd)
 
 # [TASK 6]
-cd destinationDirectory # <-
-destDirAbsPath=`pwd`
+cd "$destinationDirectory" || { echo "Error: Could not change to destination directory"; exit 1; }
+destAbsPath=$(pwd)
+cd "$origAbsPath" || { echo "Error: Could not change back to original directory"; exit 1; }
 
 # [TASK 7]
-cd # <-
-cd # <-
+cd "$origAbsPath" || { echo "Error: Could not change back to original directory"; exit 1; }
 
 # [TASK 8]
-yesterdayTS=
+cd "$targetDirectory" || { echo "Error: Could not change to target directory"; exit 1; }
 
 declare -a toBackup
 
-for file in $() # [TASK 9]
+for file in $(ls) # [TASK 9]
 do
   # [TASK 10]
-  if (())
+  if (($(date -r "$file" +%s) > yesterdayTS));
   then
     # [TASK 11]
+    toBackup+=($file)
   fi
 done
 
 # [TASK 12]
-
+tar -czvf $backupFileName ${toBackup[@]}
 # [TASK 13]
+mv "$backupFileName" "$destAbsPath"
 
 # Congratulations! You completed the final project for this course!
